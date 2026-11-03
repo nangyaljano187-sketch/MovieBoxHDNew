@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+      }
+
+      .form_designe {
+        /* background-color: rgb(8, 247, 175); */
+        background-color: brown;
+        background-size: cover;
+        padding: 22px;
+        font-size: 21px;
+        width: 100%;
+        border-radius: 11px;
+      }
+
+      .container {
+        /* border: 3px solid brown; */
+        /* display: flex;
+        flex-wrap: nowrap; */
+        padding: 20px;
+      }
+
+      .same {
+        height: 25px;
+        width: 100%;
+        color: black;
+
+      }
+
+      .btn {
+        padding: 12px;
+        border-radius: 6px;
+        width: 100%;
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+      }
+
+      body {
+        background-color: black;
+      }
+
+      /* show Papular image */
+      .container_P_show {
+        background-color: green;
+        display: flex;
+        padding: 7px;
+        width: 100%;
+        margin-top: 6px;
+      }
+
+      .PImageShoW {
+        background-color: blue;
+        width: 100%;
+      }
+
+      .picdiv {
+        width: 10%;
+      }
+
+      .same2 {
+        margin-left: 30px;
+        width: 6%;
+      }
+
+      .btn_delete {
+        padding: 8px;
+        background-color: red;
+      }
+
+      .navbar_container {
+        width: 100%;
+        background-color: blue;
+        padding: 12px;
+      }
+
+      .a_same {
+        margin-left: 17px;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="navbar_container">
+      <a href="{% url 'uploaded_page' %}" class="a_same">PapularMovies</a>
+      <a href="{% url 'Database_save_movies_catogri' %}" class="a_same">Movie_catogri</a>
+      <a href="{% url 'db_save_DMovies' %}" class="a_same">Movies</a><br><br>
+      <a href="{% url 'Papular_Videos_uploaded' %}" class="a_same">PapularVideos</a>
+      <a href="{% url 'Papular_Videos_categori' %}" class="a_same">Videos_categori</a>
+      <a href="{% url 'VIDEOS_PANEL_UPLOADED' %}" class="a_same">Videos</a><br><br>
+      <a href="{% url 'Papular_picture_uploaded' %}" class="a_same">Papular_picturs</a>
+      <a href="{% url 'Papular_pics_categori_uploaded' %}" class="a_same">Pics_catogri</a>
+      <a href="{% url 'ALL_PICS_uploaded' %}" class="a_same">Pictures_model</a><br><br>
+      <a href="{% url 'FN_catogries' %}" class="a_same">FN_catogri</a>
+      <a href="{% url 'FN_ALL_uploaded' %}" class="a_same">FN_model</a>
+      <a href="{% url 'TrandUploaded' %}" class="a_same">Tranding Movies</a>
+
+    </header>
+    <div class="container">
+      <form action="" method="post" class="form_designe" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="" style="color: white;">Movies file</label><br>
+        <input type="file" name="M_files" id="" required class="same"><br><br>
+
+        <label for="" style="color: white;">Movies name</label><br>
+        <input type="text" name="M_name" id="" required class="same" placeholder="Enter Movies name..."><br><br>
+
+
+        <label for="" style="color: white;">Movies year</label><br>
+        <input type="number" name="M_year" id="" required class="same" placeholder="Enter Movies year..."><br><br>
+
+
+        <label for="" style="color: white;">Movies Action</label><br>
+        <input type="text" name="M_Action" id="" required class="same" placeholder="Enter Movies Action..."><br><br>
+
+
+        <!-- <label for="" style="color: white;">Movies Action_F</label><br>
+        <input type="text" name="M_Action_F" id="" required class="same"
+          placeholder="Enter Movies Action foreignkey..."><br><br> -->
+
+
+        <select name="M_Action_F" data-context="available-source" id="id_Movies_ActionF">
+          <option value="" style="color: black;">---------</option>
+          {% for f in get_Movies_categori%}
+          <option value="1" style="color: black;">{{f.catogri_name}}</option>
+          {% empty %}
+          not founded...
+          {% endfor %}
+
+
+        </select>
+
+        <label for="" style="color: white;">Movies duration</label><br>
+        <input type="text" name="M_duration" id="" required class="same" placeholder="Enter Movies duration..."><br><br>
+
+        <label for="" style="color: white;">Movies description</label><br>
+        <input type="text" name="M_description" id="" required class="same"
+          placeholder="Enter Movies description..."><br><br>
+
+
+        <button class="btn">Submit</button>
+      </form>
+
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanks</title>
+    <style>
+      .form_designe {
+        /* background-color: rgb(8, 247, 175); */
+        background-image: url(/media/images.jpg);
+        background-size: cover;
+        padding: 22px;
+        font-size: 21px;
+        width: 37%;
+        border-radius: 11px;
+      }
+
+      .container {
+        /* border: 3px solid brown; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        height: 370px;
+      }
+
+      .same {
+        height: 25px;
+        width: 100%;
+
+      }
+
+      .btn {
+        padding: 12px;
+        border-radius: 6px;
+        width: 100%;
+        background-color: blue;
+        color: white;
+        cursor: pointer;
+      }
+
+      body {
+        background-color: black;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <form action="{% url 'Code_page' %}" method="post" class="form_designe">
+        {% csrf_token %}
+        <label for="" style="color: red;">Website Name</label><br>
+        <input type="text" name="Website" id="" class="same" placeholder="Enter website name..."><br><br>
+        <label for="" style="color: red;">Enter Code</label><br>
+        <input type="password" name="code" id="" class="same" placeholder="Enter code..."><br><br>
+        <button class="btn">Submit</button>
+      </form>
+    </div>
+  </body>
+
+</html>

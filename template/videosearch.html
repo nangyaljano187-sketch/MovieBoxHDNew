@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="Watch entertainment videos, movie trailers, music videos and comedy on MovieBoxHD.">
+    <meta name="theme-color" content="#0b0b0f">
+    <meta name="description" content="Moviebox - Movies,Moviebox entertainment videos and pictures.">
+    <meta name="description" content="moviebox - Movies, moviebox entertainment videos and pictures.">
+    <meta name="description" content="Netflix - Movies,Netflex entertainment Netflex videos and Netflex pictures.">
+    <meta name="description"
+      content="netflex - Free netflix Movies, netflix entertainment netflix videos and netflix pictures.">
+    <meta name="description" content="moviebox HD - Free Movies,movieboxHD entertainment videos and pictures.">
+    <meta name="description" content="MoviesboxHD - Free Movies, Moviesbox HD entertainment videos and pictures.">
+    <meta name="description" content="Moviesbox hd - Free Movies, Moviesboxhd entertainment videos and pictures.">
+
+    <title>Videos - MovieBoxHD</title>
+
+
+    <style>
+      :root {
+        --primary: #e50914;
+        --primary-hover: #b80710;
+        --bg: #0b0b0f;
+        --surface: #15151c;
+        --surface-light: #20202a;
+        --border: #2d2d38;
+        --text: #fff;
+        --muted: #a5a5b3;
+        --radius: 12px;
+        --transition: .25s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .container {
+        width: min(1200px, 92%);
+        margin: 0 auto;
+      }
+
+      /* HEADER */
+      .navbar {
+        width: 100%;
+        background: #101015;
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        width: min(1200px, 92%);
+        min-height: 72px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 25px;
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .logo-icon,
+      .logo-world {
+        color: var(--primary);
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        list-style: none;
+      }
+
+      .nav-menu a {
+        color: #d0d0d8;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-block;
+        padding: 24px 0;
+        transition: color var(--transition);
+      }
+
+      .nav-menu a:hover,
+      .nav-menu a.active {
+        color: var(--primary);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .search-toggle,
+      .menu-toggle {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        background: var(--surface);
+        color: white;
+        font-size: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .search-toggle:hover,
+      .menu-toggle:hover {
+        background: var(--primary);
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .search-box {
+        display: none;
+        padding: 14px 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .search-box.open {
+        display: block;
+      }
+
+      .header-search-form {
+        width: min(1200px, 92%);
+        margin: auto;
+        display: flex;
+        gap: 10px;
+      }
+
+      .header-search-form input,
+      .videos-search input {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        outline: none;
+        background: var(--surface);
+        color: white;
+      }
+
+      .header-search-form input:focus,
+      .videos-search input:focus {
+        border-color: var(--primary);
+      }
+
+      .header-search-form button,
+      .videos-search button {
+        border: 0;
+        border-radius: 8px;
+        padding: 0 18px;
+        background: var(--primary);
+        color: white;
+        font-weight: 700;
+      }
+
+      /* ADSTERRA AD BELOW HEADER */
+      .ad-section {
+        width: 100%;
+        padding: 18px 0;
+        background: var(--bg);
+      }
+
+      .ad-container {
+        width: 100%;
+        min-height: 120px;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        overflow: hidden;
+        text-align: center;
+        background: var(--surface);
+        border: 1px dashed #444;
+        border-radius: 10px;
+      }
+
+      .ad-label {
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+
+      .ad-container img,
+      .ad-container iframe {
+        max-width: 100%;
+      }
+
+      /* PAGE HEADING */
+      .videos-page {
+        min-height: 70vh;
+        padding: 30px 0 65px;
+      }
+
+      .videos-heading {
+        margin-bottom: 26px;
+      }
+
+      .breadcrumb {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+
+      .breadcrumb a:hover {
+        color: var(--primary);
+      }
+
+      .videos-heading h1 {
+        font-size: clamp(30px, 4vw, 42px);
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+
+      .videos-heading h1 span {
+        color: var(--primary);
+      }
+
+      .videos-heading p {
+        color: var(--muted);
+        max-width: 650px;
+        font-size: 15px;
+      }
+
+      /* SEARCH AND FILTERS */
+      .videos-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+      }
+
+      .videos-search {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+        max-width: 430px;
+        min-width: 240px;
+      }
+
+      .video-filters {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .video-filter {
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        padding: 8px 14px;
+        color: #d0d0d8;
+        background: var(--surface);
+        font-size: 13px;
+        transition: all var(--transition);
+      }
+
+      .video-filter:hover,
+      .video-filter.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+
+      .videos-count {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 15px;
+      }
+
+      .videos-count span {
+        color: white;
+        font-weight: 700;
+      }
+
+      /* VIDEO GRID */
+      .videos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .video-card {
+        min-width: 0;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+        transition: transform var(--transition), border-color var(--transition);
+      }
+
+      .video-card:hover {
+        transform: translateY(-4px);
+        border-color: #555560;
+      }
+
+      .video-card[hidden] {
+        display: none !important;
+      }
+
+      .video-thumbnail {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        position: relative;
+        overflow: hidden;
+        background: #252530;
+      }
+
+      .video-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .4s ease;
+      }
+
+      .video-card:hover .video-thumbnail img {
+        transform: scale(1.05);
+      }
+
+      .video-thumbnail::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, .7), transparent 60%);
+        pointer-events: none;
+      }
+
+      .video-play {
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 56px;
+        height: 56px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        color: white;
+        background: rgba(229, 9, 20, .92);
+        font-size: 22px;
+        padding-left: 4px;
+      }
+
+      .video-play:hover {
+        background: var(--primary-hover);
+        transform: translate(-50%, -50%) scale(1.08);
+      }
+
+      .video-duration,
+      .video-category-label {
+        position: absolute;
+        z-index: 2;
+        bottom: 10px;
+        padding: 3px 7px;
+        border-radius: 4px;
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .video-duration {
+        right: 10px;
+        background: rgba(0, 0, 0, .85);
+      }
+
+      .video-category-label {
+        bottom: 170px;
+        left: 300px;
+        background: var(--primary);
+      }
+
+      .video-info {
+        padding: 16px;
+      }
+
+      .video-info h3 {
+        font-size: 17px;
+        line-height: 1.4;
+        margin-bottom: 7px;
+      }
+
+      .video-info p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 13px;
+      }
+
+      .video-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 12px;
+        border-top: 1px solid var(--border);
+        padding-top: 12px;
+      }
+
+      .video-meta span:first-child {
+        color: #e0e0e8;
+      }
+
+      .video-watch-btn {
+        margin-top: 14px;
+        padding: 9px 14px;
+        border: 0;
+        border-radius: 6px;
+        background: var(--primary);
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .video-watch-btn:hover {
+        background: var(--primary-hover);
+      }
+
+      /* NO RESULTS */
+      .videos-empty {
+        display: none;
+        text-align: center;
+        padding: 45px 20px;
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .videos-empty.show {
+        display: block;
+      }
+
+      .empty-icon {
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+
+      .videos-empty p {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* PLAYER MODAL */
+      .video-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(0, 0, 0, .92);
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .video-modal.open {
+        display: flex;
+      }
+
+      .video-modal-content {
+        position: relative;
+        width: min(900px, 100%);
+        background: #111116;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 15px;
+      }
+
+      .video-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 12px;
+      }
+
+      .video-modal-header h2 {
+        font-size: 18px;
+        overflow-wrap: anywhere;
+      }
+
+      .close-video-modal {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface-light);
+        color: white;
+        font-size: 24px;
+      }
+
+      .close-video-modal:hover {
+        background: var(--primary);
+      }
+
+      .video-player {
+        display: block;
+        width: 100%;
+        max-height: 70vh;
+        background: black;
+        border-radius: 8px;
+      }
+
+      .video-player-message {
+        color: var(--muted);
+        font-size: 13px;
+        padding-top: 12px;
+      }
+
+      /* FOOTER */
+      .site-footer {
+        background: #101015;
+        border-top: 1px solid var(--border);
+        padding: 28px 0;
+      }
+
+      .footer-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer-logo {
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .footer-logo span {
+        color: var(--primary);
+      }
+
+      .footer-copy {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 1000px) {
+        .videos-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .nav-menu {
+          gap: 14px;
+        }
+
+        .nav-menu a {
+          font-size: 13px;
+        }
+      }
+
+      @media (max-width: 760px) {
+        .nav-container {
+          min-height: 66px;
+          gap: 10px;
+        }
+
+        .logo {
+          font-size: 22px;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+        }
+
+        .nav-actions {
+          margin-left: auto;
+        }
+
+        .nav-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 8px 4%;
+          background: #101015;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .nav-menu.open {
+          display: flex;
+        }
+
+        .nav-menu li {
+          border-bottom: 1px solid var(--border);
+        }
+
+        .nav-menu li:last-child {
+          border-bottom: none;
+        }
+
+        .nav-menu a {
+          display: block;
+          padding: 12px 5px;
+          font-size: 15px;
+        }
+
+        .videos-toolbar {
+          align-items: stretch;
+        }
+
+        .videos-search {
+          max-width: none;
+          width: 100%;
+        }
+
+        .video-filters {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .videos-grid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .videos-heading h1 {
+          font-size: 30px;
+        }
+
+        .video-info h3 {
+          font-size: 16px;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .video-modal {
+          padding: 10px;
+        }
+
+        .video-modal-content {
+          padding: 10px;
+        }
+
+        .video-modal-header h2 {
+          font-size: 15px;
+        }
+
+        .ad-section {
+          padding: 12px 0;
+        }
+
+        .ad-container {
+          min-height: 100px;
+          padding: 10px;
+        }
+      }
+
+      /* ===== EXTRA RESPONSIVE CSS ===== */
+
+      * {
+        min-width: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      .container,
+      .nav-container {
+        width: min(1200px, 94%);
+      }
+
+      /* VIDEO GRID */
+      .videos-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .video-card {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .video-thumbnail {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+      }
+
+      .video-thumbnail video {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100%;
+        object-fit: contain;
+        background: #000;
+      }
+
+      /* CATEGORY LABEL */
+      .video-category-label {
+        left: 10px;
+        bottom: 10px;
+        max-width: calc(100% - 20px);
+      }
+
+      /* VIDEO INFORMATION */
+      .video-info {
+        overflow-wrap: anywhere;
+      }
+
+      .video-info h3 {
+        overflow-wrap: anywhere;
+      }
+
+      .video-meta {
+        flex-wrap: wrap;
+      }
+
+      /* SEARCH AND FILTERS */
+      .videos-toolbar {
+        width: 100%;
+        align-items: center;
+      }
+
+      .videos-search {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .videos-search input {
+        width: 100%;
+      }
+
+      .video-filters {
+        max-width: 100%;
+      }
+
+      .video-filter {
+        white-space: normal;
+      }
+
+      /* HEADER */
+      .nav-container {
+        position: relative;
+      }
+
+      .logo {
+        flex-shrink: 0;
+      }
+
+      .nav-actions {
+        flex-shrink: 0;
+      }
+
+      .header-search-form {
+        width: 94%;
+      }
+
+      .header-search-form input {
+        width: 100%;
+      }
+
+      /* ADVERTISEMENT */
+      .ad-container {
+        max-width: 100%;
+      }
+
+      .ad-container iframe,
+      .ad-container img {
+        max-width: 100%;
+      }
+
+      /* VIDEO MODAL */
+      .video-modal {
+        overflow-y: auto;
+      }
+
+      .video-modal-content {
+        max-height: 95vh;
+        overflow-y: auto;
+      }
+
+      .video-player {
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+      }
+
+      /* TABLET */
+      @media (max-width: 1000px) {
+        .videos-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+        }
+
+        .videos-page {
+          padding-top: 25px;
+        }
+
+        .video-info {
+          padding: 13px;
+        }
+      }
+
+      /* MOBILE */
+      @media (max-width: 760px) {
+
+        .container,
+        .nav-container {
+          width: 94%;
+        }
+
+        .nav-container {
+          min-height: 64px;
+        }
+
+        .logo {
+          font-size: 20px;
+        }
+
+        .nav-menu {
+          z-index: 1001;
+        }
+
+        .videos-heading h1 {
+          font-size: clamp(27px, 7vw, 34px);
+        }
+
+        .videos-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .videos-search {
+          max-width: none;
+        }
+
+        .video-filters {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+
+        .video-filter {
+          padding: 8px 12px;
+        }
+
+        .footer-content {
+          align-items: flex-start;
+        }
+      }
+
+      /* SMALL MOBILE */
+      @media (max-width: 520px) {
+        .videos-grid {
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .videos-page {
+          padding: 22px 0 40px;
+        }
+
+        .videos-heading {
+          margin-bottom: 20px;
+        }
+
+        .videos-heading p {
+          font-size: 13px;
+        }
+
+        .videos-search {
+          min-width: 0;
+          gap: 6px;
+        }
+
+        .videos-search input {
+          padding: 10px;
+          font-size: 13px;
+        }
+
+        .videos-search button {
+          padding: 0 12px;
+          font-size: 13px;
+        }
+
+        .video-info {
+          padding: 12px;
+        }
+
+        .video-info h3 {
+          font-size: 16px;
+        }
+
+        .video-info p {
+          font-size: 12px;
+        }
+
+        .video-watch-btn {
+          width: 100%;
+          padding: 11px;
+        }
+
+        .video-modal {
+          padding: 8px;
+        }
+
+        .video-modal-content {
+          padding: 10px;
+        }
+
+        .video-modal-header h2 {
+          font-size: 14px;
+        }
+
+        .video-player {
+          max-height: 55vh;
+        }
+
+        .footer-content {
+          gap: 12px;
+        }
+
+        .footer-links {
+          gap: 12px;
+        }
+
+        .ad-section {
+          padding: 10px 0;
+        }
+      }
+
+      /* VERY SMALL MOBILE */
+      @media (max-width: 360px) {
+        .logo {
+          font-size: 18px;
+        }
+
+        .search-toggle,
+        .menu-toggle {
+          width: 35px;
+          height: 35px;
+        }
+
+        .videos-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .video-filter {
+          font-size: 12px;
+          padding: 7px 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <header class="navbar">
+      <div class="nav-container">
+        <a href="{% url 'home' %}" class="logo" aria-label="CineWorld Home">
+          <span class="logo-icon">▶</span>
+          <span>MovieBox<span class="logo-world">HD</span></span>
+        </a>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'Movies' %}">Movies</a></li>
+          <li><a href="{% url 'videos' %}" class="active">Videos</a></li>
+          <li><a href="{% url 'pictures' %}">Pictures</a></li>
+          <li><a href="{% url 'Tranding_Movies' %}">Tranding Movies</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <button class="search-toggle" id="searchToggle" type="button" aria-label="Toggle search"
+            aria-expanded="false">⌕</button>
+          <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation"
+            aria-controls="navMenu" aria-expanded="false">☰</button>
+        </div>
+      </div>
+
+      <div class="search-box" id="searchBox">
+        <form class="header-search-form" id="" method="get" action="{% url 'VIdEO_SEARCH' %}">
+          <input type="search" id="" name="v_search" placeholder="Search videos..." aria-label="Search videos">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </header>
+
+    <!-- ADSTERRA AD: HEADER KE BILKUL NEECHAY -->
+    <section class="ad-section" aria-label="Advertisement">
+      <div class="container">
+        <div class="ad-container">
+          <span class="ad-label">Advertisement</span>
+
+          <!--
+          Adsterra se apna actual ad code yahan paste karo.
+          Placeholder khud se ad display nahi karega.
+        -->
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN VIDEOS -->
+    <main class="videos-page">
+      <div class="container">
+
+        <section class="videos-heading">
+          <div class="breadcrumb"><a href="index.html">Home</a> / Videos</div>
+          <h1>Explore <span>Videos</span></h1>
+          <p>Watch your favourite trailers, entertainment clips, music <a href="{% url 'Code_page' %}"
+              style="color: red;">videos</a> and
+            comedy content in
+            one
+            place.</p>
+        </section>
+
+        <section class="videos-toolbar">
+          <form class="videos-search" id="" method="get" action="{% url 'VIdEO_SEARCH' %}">
+            <input type="search" id="" name="v_search" placeholder="Search videos..." aria-label="Search video titles">
+            <button type="submit">Search</button>
+          </form>
+
+          <div class="video-filters" aria-label="Filter videos">
+            <a href="{% url 'videos' %}"><button class="video-filter active" data-category="all" type="button">All
+                Videos</button></a>
+            {% for m in allV_coatogri_get%}
+            <a href="{% url 'VIDEOS_S' m.id %}"><button class="video-filter" data-category="trailers"
+                type="button">{{m.video_catogri}}</button></a>
+            {% endfor %}
+          </div>
+        </section>
+
+        <p class="videos-count">Showing <span id="videoCount">6</span> videos</p>
+
+        <section class="videos-grid" id="videosGrid">
+          {% for p in v_data%}
+
+          <article class="video-card" data-title="Action Movie Preview" data-category="trailers" data-video-src="">
+            <div class="video-thumbnail">
+              <video src="{{p.Videos_File.url}}" controls style="height: 220px;width:100%;"></video>
+            </div>
+            <div class="video-info">
+              <h3>{{p.Videos_Title}}</h3>
+              <p>{{p.Videos_decs}}</p>
+              <div class="video-meta"><span>{{p.Videos_Action_m2 }}</span><span>HD Video</span>
+              </div>
+              <a href="{{p.Videos_File.url}}"><button class="video-watch-btn" type="button">▶ Watch Video</button></a>
+            </div>
+          </article>
+          {% empty %}
+          <p style="color: red;"> not founded <b style="color: blue;">{{v_query_s}}</b> Please Try again...</p>
+          {% endfor %}
+
+        </section>
+
+        <div class="videos-empty" id="videosEmpty">
+          <div class="empty-icon">🔎</div>
+          <h3>No Videos Found</h3>
+          <p>Try another search term or select a different category.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- VIDEO PLAYER MODAL -->
+    <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle">
+      <div class="video-modal-content">
+        <div class="video-modal-header">
+          <h2 id="videoModalTitle">Watch Video</h2>
+          <button class="close-video-modal" id="closeVideoModal" type="button"
+            aria-label="Close video player">&times;</button>
+        </div>
+        <video class="video-player" id="videoPlayer" controls playsinline preload="metadata"></video>
+        <p class="video-player-message" id="videoPlayerMessage">Select a video to play.</p>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <a href="{% url 'home' %}" class="footer-logo">MovieBox<span>HD</span></a>
+        <p class="footer-copy">&copy; <span id="currentYear"></span> MovieBoxHD. All rights reserved.</p>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'Movies' %}">Movies</a>
+          <a href="{% url 'videos' %}">Videos</a>
+          <a href="{% url 'pictures' %}">Pictures</a>
+          <a href="{% url 'Tranding_Movies' %}">Tranding Movies</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+        const searchToggle = document.getElementById("searchToggle");
+        const searchBox = document.getElementById("searchBox");
+        const headerSearchForm = document.getElementById("searchForm");
+        const headerSearchInput = document.getElementById("searchInput");
+
+        const videoSearchForm = document.getElementById("videoSearchForm");
+        const videoSearch = document.getElementById("videoSearch");
+        const videoCards = Array.from(document.querySelectorAll(".video-card"));
+        const videoFilters = document.querySelectorAll(".video-filter");
+        const videoCount = document.getElementById("videoCount");
+        const videosEmpty = document.getElementById("videosEmpty");
+
+        const videoModal = document.getElementById("videoModal");
+        const videoModalTitle = document.getElementById("videoModalTitle");
+        const videoPlayer = document.getElementById("videoPlayer");
+        const videoPlayerMessage = document.getElementById("videoPlayerMessage");
+        const closeVideoModal = document.getElementById("closeVideoModal");
+
+        let activeCategory = "all";
+
+        document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+        menuToggle.addEventListener("click", function () {
+          const isOpen = navMenu.classList.toggle("open");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          menuToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        navMenu.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            navMenu.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.textContent = "☰";
+          });
+        });
+
+        searchToggle.addEventListener("click", function () {
+          const isOpen = searchBox.classList.toggle("open");
+          searchToggle.setAttribute("aria-expanded", String(isOpen));
+          if (isOpen) headerSearchInput.focus();
+        });
+
+        function applyFilters() {
+          const term = videoSearch.value.trim().toLowerCase();
+          let count = 0;
+
+          videoCards.forEach(function (card) {
+            const title = (card.dataset.title || "").toLowerCase();
+            const description = card.querySelector(".video-info p").textContent.toLowerCase();
+            const category = card.dataset.category;
+
+            const matchesText = title.includes(term) || description.includes(term);
+            const matchesCategory = activeCategory === "all" || category === activeCategory;
+            const visible = matchesText && matchesCategory;
+
+            card.hidden = !visible;
+            if (visible) count++;
+          });
+
+          videoCount.textContent = count;
+          videosEmpty.classList.toggle("show", count === 0);
+        }
+
+        videoSearch.addEventListener("input", applyFilters);
+
+        videoSearchForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          applyFilters();
+        });
+
+        videoFilters.forEach(function (button) {
+          button.addEventListener("click", function () {
+            videoFilters.forEach(filter => filter.classList.remove("active"));
+            button.classList.add("active");
+            activeCategory = button.dataset.category;
+            applyFilters();
+          });
+        });
+
+        // headerSearchForm.addEventListener("submit", function (event) {
+        //   event.preventDefault();
+        //   videoSearch.value = headerSearchInput.value;
+        //   applyFilters();
+        //   document.querySelector(".videos-page").scrollIntoView({behavior: "smooth"});
+        // });
+
+        headerSearchInput.addEventListener("input", function () {
+          videoSearch.value = headerSearchInput.value;
+          applyFilters();
+        });
+
+        function openVideo(card) {
+          const title = card.dataset.title || "Watch Video";
+          const source = (card.dataset.videoSrc || "").trim();
+
+          videoModalTitle.textContent = title;
+          videoModal.classList.add("open");
+          document.body.classList.add("modal-open");
+
+          videoPlayer.pause();
+          videoPlayer.removeAttribute("src");
+          videoPlayer.load();
+
+          if (source) {
+            videoPlayerMessage.textContent = "Loading video...";
+            videoPlayer.src = source;
+            videoPlayer.load();
+
+            videoPlayer.play().catch(function () {
+              videoPlayerMessage.textContent = "Video load ho gaya ho to Play button dabayein.";
+            });
+          } else {
+            videoPlayerMessage.textContent =
+              "Demo video: abhi video file connect nahi hai. Apni legal video file ka path data-video-src mein add karein.";
+          }
+
+          closeVideoModal.focus();
+        }
+
+        videoCards.forEach(function (card) {
+          card.querySelector(".video-play").addEventListener("click", function () {
+            openVideo(card);
+          });
+
+          card.querySelector(".video-watch-btn").addEventListener("click", function () {
+            openVideo(card);
+          });
+        });
+
+        function closeModal() {
+          videoModal.classList.remove("open");
+          document.body.classList.remove("modal-open");
+          videoPlayer.pause();
+          videoPlayer.removeAttribute("src");
+          videoPlayer.load();
+        }
+
+        closeVideoModal.addEventListener("click", closeModal);
+
+        videoModal.addEventListener("click", function (event) {
+          if (event.target === videoModal) closeModal();
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
+            if (videoModal.classList.contains("open")) closeModal();
+
+            navMenu.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.textContent = "☰";
+
+            searchBox.classList.remove("open");
+            searchToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        applyFilters();
+      });
+    </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="Explore movies on MovieBox HD. Browse MovieBoxHD action,MovieBox HD comedy,MovieBox HD drama, MovieBox HD thriller and MovieBox HD animated MovieBox HD movies.">
+    <meta name="description" content="Moviebox - Movies,Moviebox entertainment videos and pictures.">
+    <meta name="description" content="moviebox - Movies, moviebox entertainment videos and pictures.">
+    <meta name="description" content="Netflex - Movies,Netflex entertainment videos and pictures.">
+    <meta name="description" content="netflex - Free Movies, netflex entertainment videos and pictures.">
+    <meta name="description" content="movieboxHD - Free Movies,moviebox HD entertainment videos and pictures.">
+    <meta name="description" content="Moviesbox HD - Free Movies, Moviesbox HD entertainment videos and pictures.">
+    <meta name="description" content="Moviesboxhd - Free Movies, Moviesbox hd entertainment videos and pictures.">
+    <title>Movies - MovieBoxHD</title>
+
+
+    <style>
+      .movies-page {
+        min-height: 70vh;
+        padding: 40px 0 70px;
+      }
+
+      .movies-heading {
+        margin-bottom: 30px;
+      }
+
+      .movies-heading h1 {
+        font-size: clamp(28px, 4vw, 42px);
+        margin-bottom: 10px;
+      }
+
+      .movies-heading h1 span {
+        color: var(--primary-color, #e50914);
+      }
+
+      .movies-heading p {
+        color: #aaa;
+        line-height: 1.7;
+      }
+
+      /* Adsterra placement below navigation */
+      .ad-section {
+        padding: 20px 0 10px;
+      }
+
+      .ad-label {
+        margin-bottom: 8px;
+        color: #888;
+        font-size: 11px;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .adsterra-slot {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        overflow: hidden;
+        border: 1px dashed #383838;
+        border-radius: 8px;
+        background: #171717;
+        color: #999;
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .adsterra-slot p {
+        margin: 0;
+      }
+
+      .movies-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .movies-search {
+        display: flex;
+        flex: 1;
+        min-width: 230px;
+        max-width: 420px;
+        gap: 8px;
+      }
+
+      .movies-search input {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        padding: 12px 15px;
+        color: #fff;
+        background: #191919;
+        border: 1px solid #383838;
+        border-radius: 6px;
+        outline: none;
+      }
+
+      .movies-search input:focus {
+        border-color: #e50914;
+      }
+
+      .movies-search button,
+      .movie-download {
+        padding: 11px 17px;
+        color: #fff;
+        background: #e50914;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .movies-search button:hover,
+      .movie-download:hover {
+        background: #b80710;
+      }
+
+      .movie-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-bottom: 30px;
+      }
+
+      .movie-filter {
+        padding: 9px 16px;
+        color: #ddd;
+        background: #191919;
+        border: 1px solid #383838;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .movie-filter:hover,
+      .movie-filter.active {
+        color: #fff;
+        background: #e50914;
+        border-color: #e50914;
+      }
+
+      .movies-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .movie-card {
+        min-width: 0;
+        overflow: hidden;
+        background: #171717;
+        border: 1px solid #292929;
+        border-radius: 10px;
+        transition: transform 0.25s, border-color 0.25s;
+      }
+
+      .movie-card:hover {
+        transform: translateY(-5px);
+        border-color: #e50914;
+      }
+
+      .movie-poster {
+        position: relative;
+        aspect-ratio: 2 / 3;
+        overflow: hidden;
+        background: #242424;
+      }
+
+      .movie-poster img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.35s;
+      }
+
+      .movie-card:hover .movie-poster img {
+        transform: scale(1.04);
+      }
+
+      .movie-quality {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 8px;
+        color: white;
+        background: #e50914;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: bold;
+      }
+
+      .movie-info {
+        padding: 15px;
+      }
+
+      .movie-info h2 {
+        margin: 0 0 8px;
+        font-size: 17px;
+        line-height: 1.4;
+      }
+
+      .movie-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 10px;
+        color: #aaa;
+        font-size: 12px;
+      }
+
+      .movie-info p {
+        margin: 0 0 15px;
+        color: #bbb;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .movie-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .movie-details {
+        flex: 1;
+        padding: 10px;
+        color: #eee;
+        background: #292929;
+        border-radius: 6px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 13px;
+      }
+
+      .movie-details:hover {
+        background: #383838;
+      }
+
+      .movie-download {
+        display: inline-block;
+        padding: 10px;
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .movies-empty {
+        padding: 35px 15px;
+        color: #bbb;
+        text-align: center;
+        background: #171717;
+        border-radius: 8px;
+      }
+
+      .movies-empty[hidden],
+      .movie-card[hidden] {
+        display: none !important;
+      }
+
+      .movies-pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 40px;
+      }
+
+      .movies-pagination a {
+        padding: 10px 15px;
+        color: #fff;
+        background: #191919;
+        border: 1px solid #383838;
+        border-radius: 5px;
+        text-decoration: none;
+      }
+
+      .movies-pagination a.current,
+      .movies-pagination a:hover {
+        background: #e50914;
+        border-color: #e50914;
+      }
+
+      @media (max-width: 1000px) {
+        .movies-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+        }
+      }
+
+      @media (max-width: 700px) {
+        .movies-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .movie-info {
+          padding: 11px;
+        }
+
+        .movie-info h2 {
+          font-size: 15px;
+        }
+
+        .movie-actions {
+          flex-direction: column;
+        }
+
+        .movies-toolbar {
+          align-items: stretch;
+        }
+
+        .movies-search {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 360px) {
+        .movies-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ==========================================
+   MoviesBoxHD - COMPLETE MOVIES PAGE CSS
+   Header + Navigation + Search + Movies + Footer
+========================================== */
+
+      :root {
+        --primary: #e50914;
+        --primary-hover: #b80710;
+        --bg: #0b0b0b;
+        --surface: #171717;
+        --surface-light: #222;
+        --border: #303030;
+        --text: #ffffff;
+        --muted: #aaaaaa;
+      }
+
+      /* RESET */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      .container {
+        width: min(1200px, 92%);
+        margin: 0 auto;
+      }
+
+      /* ==========================================
+   HEADER AND NAVIGATION
+========================================== */
+
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #101010;
+        border-bottom: 1px solid #292929;
+      }
+
+      .nav-container {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+      }
+
+      .logo {
+        flex-shrink: 0;
+        color: #fff;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+
+      .logo span {
+        color: var(--primary);
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+      }
+
+      .nav-menu a {
+        color: #ccc;
+        font-size: 14px;
+        font-weight: 600;
+        transition: color 0.2s;
+      }
+
+      .nav-menu a:hover,
+      .nav-menu a.active {
+        color: var(--primary);
+      }
+
+      .menu-toggle,
+      .search-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 42px;
+        min-height: 42px;
+        color: #fff;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 20px;
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .menu-toggle:hover,
+      .search-toggle:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+      }
+
+      /* HEADER SEARCH */
+
+      .search-box {
+        display: none;
+        padding: 0 0 16px;
+      }
+
+      .search-box.open {
+        display: block;
+      }
+
+      .search-box form {
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-box input {
+        flex: 1;
+        min-width: 0;
+        padding: 12px 15px;
+        color: #fff;
+        background: #1b1b1b;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        outline: none;
+      }
+
+      .search-box input:focus {
+        border-color: var(--primary);
+      }
+
+      .search-box button {
+        padding: 10px 18px;
+        color: #fff;
+        background: var(--primary);
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+
+      /* ==========================================
+   MOVIES PAGE HEADING
+========================================== */
+
+      .movies-page {
+        min-height: 70vh;
+        padding: 40px 0 70px;
+      }
+
+      .movies-heading {
+        margin-bottom: 30px;
+      }
+
+      .movies-heading h1 {
+        margin-bottom: 10px;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.3;
+      }
+
+      .movies-heading h1 span {
+        color: var(--primary);
+      }
+
+      .movies-heading p {
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      /* ==========================================
+   MOVIE SEARCH
+========================================== */
+
+      .movies-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .movies-search {
+        display: flex;
+        flex: 1;
+        gap: 8px;
+        min-width: 230px;
+        max-width: 450px;
+      }
+
+      .movies-search input {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 15px;
+        color: #fff;
+        background: #191919;
+        border: 1px solid #383838;
+        border-radius: 6px;
+        outline: none;
+      }
+
+      .movies-search input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px rgb(229 9 20 / 15%);
+      }
+
+      .movies-search button {
+        padding: 11px 17px;
+        color: #fff;
+        background: var(--primary);
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+
+      .movies-search button:hover,
+      .search-box button:hover {
+        background: var(--primary-hover);
+      }
+
+      #movieCount {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      /* ==========================================
+   GENRE FILTERS
+========================================== */
+
+      .movie-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-bottom: 30px;
+      }
+
+      .movie-filter {
+        padding: 9px 16px;
+        color: #ddd;
+        background: #191919;
+        border: 1px solid #383838;
+        border-radius: 25px;
+        transition: background 0.2s, border-color 0.2s;
+      }
+
+      .movie-filter:hover,
+      .movie-filter.active {
+        color: #fff;
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      /* ==========================================
+   MOVIE GRID AND CARDS
+========================================== */
+
+      .movies-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .movie-card {
+        min-width: 0;
+        overflow: hidden;
+        background: var(--surface);
+        border: 1px solid #292929;
+        border-radius: 10px;
+        transition: transform 0.25s, border-color 0.25s;
+      }
+
+      .movie-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary);
+      }
+
+      .movie-card[hidden] {
+        display: none !important;
+      }
+
+      /* MOVIE POSTER */
+
+      .movie-poster {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 2 / 3;
+        background: #242424;
+        height: 141px;
+        width: 100%;
+      }
+
+      .movie-poster img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.35s;
+      }
+
+      .movie-card:hover .movie-poster img {
+        transform: scale(1.04);
+      }
+
+      .movie-quality {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 5px 8px;
+        color: #fff;
+        background: var(--primary);
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      /* MOVIE DETAILS */
+
+      .movie-info {
+        padding: 15px;
+      }
+
+      .movie-info h2 {
+        margin-bottom: 8px;
+        color: #fff;
+        font-size: 17px;
+        line-height: 1.4;
+      }
+
+      .movie-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .movie-info p {
+        min-height: 62px;
+        margin-bottom: 15px;
+        color: #bbb;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      /* MOVIE BUTTONS */
+
+      .movie-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .movie-details,
+      .movie-download {
+        display: inline-block;
+        flex: 1;
+        padding: 10px 8px;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .movie-details {
+        color: #eee;
+        background: #292929;
+      }
+
+      .movie-details:hover {
+        background: #383838;
+      }
+
+      .movie-download {
+        color: #fff;
+        background: var(--primary);
+      }
+
+      .movie-download:hover {
+        background: var(--primary-hover);
+      }
+
+      /* NO SEARCH RESULTS */
+
+      .movies-empty {
+        margin-top: 25px;
+        padding: 35px 15px;
+        color: #bbb;
+        background: var(--surface);
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .movies-empty[hidden] {
+        display: none !important;
+      }
+
+      /* PAGINATION */
+
+      .movies-pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 40px;
+      }
+
+      .movies-pagination a {
+        padding: 10px 15px;
+        color: #fff;
+        background: #191919;
+        border: 1px solid #383838;
+        border-radius: 5px;
+      }
+
+      .movies-pagination a.current,
+      .movies-pagination a:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+      }
+
+      /* ==========================================
+   FOOTER
+========================================== */
+
+      .footer {
+        padding: 30px 0;
+        background: #101010;
+        border-top: 1px solid #292929;
+        text-align: center;
+      }
+
+      .footer p {
+        margin: 5px 0;
+        color: #999;
+        font-size: 13px;
+      }
+
+      /* ==========================================
+   FOCUS AND ACCESSIBILITY
+========================================== */
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 3px;
+      }
+
+      /* ==========================================
+   TABLET
+========================================== */
+
+      @media (max-width: 1000px) {
+        .movies-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 18px;
+        }
+
+        .nav-menu {
+          gap: 16px;
+        }
+      }
+
+      /* ==========================================
+   MOBILE NAVIGATION
+========================================== */
+
+      @media (max-width: 768px) {
+        .nav-container {
+          min-height: 68px;
+          gap: 12px;
+        }
+
+        .logo {
+          font-size: 24px;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+          margin-left: auto;
+        }
+
+        .nav-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          left: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px 4%;
+          background: #101010;
+          border-bottom: 1px solid #333;
+        }
+
+        .nav-menu.open {
+          display: flex;
+        }
+
+        .nav-menu a {
+          display: block;
+          padding: 13px 8px;
+          border-bottom: 1px solid #242424;
+        }
+
+        .movies-page {
+          padding: 28px 0 50px;
+        }
+
+        .movies-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .movie-info {
+          padding: 11px;
+        }
+
+        .movie-info h2 {
+          font-size: 15px;
+        }
+
+        .movie-info p {
+          min-height: 0;
+        }
+
+        .movie-actions {
+          flex-direction: column;
+        }
+
+        .movies-toolbar {
+          align-items: stretch;
+        }
+
+        .movies-search {
+          max-width: none;
+        }
+      }
+
+      /* ==========================================
+   SMALL MOBILE
+========================================== */
+
+      @media (max-width: 360px) {
+        .movies-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .movies-heading h1 {
+          font-size: 27px;
+        }
+
+        .movie-filters {
+          gap: 7px;
+        }
+
+        .movie-filter {
+          padding: 8px 12px;
+          font-size: 13px;
+        }
+      }
+
+      /* ==========================================
+   MOVIES PAGE — RESPONSIVE CSS ONLY
+========================================== */
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: min(1200px, 92%);
+      }
+
+      .movies-grid {
+        width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        align-items: start;
+      }
+
+      .movie-card {
+        min-width: 0;
+        width: 100%;
+      }
+
+      .movie-poster {
+        width: 100%;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+      }
+
+      .movie-poster video {
+        display: block;
+        width: 100%;
+        height: 100% !important;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+        background: #000;
+      }
+
+      .movie-info h2,
+      .movie-info p {
+        overflow-wrap: anywhere;
+      }
+
+      .movies-search {
+        min-width: 0;
+      }
+
+      .movies-search input {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .movie-filter {
+        max-width: 100%;
+        white-space: normal;
+      }
+
+      @media (max-width: 1000px) {
+        .movies-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 16px;
+        }
+
+        .nav-menu {
+          gap: 14px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          width: calc(100% - 28px);
+        }
+
+        .nav-container {
+          min-height: 64px;
+          gap: 10px;
+        }
+
+        .logo {
+          font-size: 23px;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+          margin-left: auto;
+        }
+
+        .nav-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 10px 4%;
+          background: #101010;
+          border-bottom: 1px solid #333;
+        }
+
+        .nav-menu.open {
+          display: flex;
+        }
+
+        .nav-menu a {
+          display: block;
+          padding: 13px 8px;
+          border-bottom: 1px solid #242424;
+        }
+
+        .search-box form {
+          width: 100%;
+        }
+
+        .search-box input {
+          width: 100%;
+        }
+
+        .movies-page {
+          padding: 26px 0 45px;
+        }
+
+        .movies-heading h1 {
+          font-size: clamp(25px, 7vw, 34px);
+        }
+
+        .movies-heading p {
+          font-size: 14px;
+        }
+
+        .movies-toolbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .movies-search {
+          width: 100%;
+          max-width: none;
+        }
+
+        .movies-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 12px;
+        }
+
+        .movie-info {
+          padding: 10px;
+        }
+
+        .movie-info h2 {
+          font-size: 14px;
+        }
+
+        .movie-info p {
+          min-height: 0;
+          font-size: 12px;
+        }
+
+        .movie-meta {
+          gap: 6px;
+          font-size: 11px;
+        }
+
+        .movie-actions {
+          flex-direction: column;
+          gap: 7px;
+        }
+
+        .movie-details,
+        .movie-download {
+          width: 100%;
+          padding: 9px 7px;
+        }
+
+        .movies-pagination {
+          flex-wrap: wrap;
+          gap: 7px;
+        }
+
+        .movies-pagination a {
+          padding: 8px 11px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .container {
+          width: calc(100% - 22px);
+        }
+
+        .movies-grid {
+          gap: 9px;
+        }
+
+        .movie-info {
+          padding: 8px;
+        }
+
+        .movie-info h2 {
+          font-size: 13px;
+        }
+
+        .movie-quality {
+          top: 6px;
+          left: 6px;
+          padding: 4px 6px;
+          font-size: 10px;
+        }
+      }
+
+      @media (max-width: 320px) {
+        .movies-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <header class="navbar">
+      <div class="container nav-container">
+
+        <a href="{% url 'home' %}" class="logo">
+          MovieBox<span>HD</span>
+        </a>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Toggle navigation" aria-controls="navMenu"
+          aria-expanded="false">
+          ☰
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+          <a href="{% url 'home' %}">Home</a>
+          <a href="{% url 'Movies' %}" class="active" aria-current="page">Movies</a>
+          <a href="{% url 'videos' %}">Videos</a>
+          <a href="{% url 'pictures' %}">Pictures</a>
+          <a href="{% url 'Tranding_Movies' %}">Tranding Movies</a>
+        </nav>
+
+        <button class="search-toggle" id="searchToggle" type="button" aria-label="Open search">
+          🔍
+        </button>
+      </div>
+
+      <div class="container search-box" id="searchBox">
+        <form id="searchForm" method="get" action="{% url 'search' %}">
+          <input type="search" id="searchInput" name="search" placeholder="Search movies..." aria-label="Search movies">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </header>
+
+    <!-- Adsterra ad placement: directly below the header -->
+    <section class="ad-section container" aria-label="Advertisement">
+      <div class="ad-label">Advertisement</div>
+
+      <div class="adsterra-slot">
+        <!-- Replace this placeholder with the exact code generated
+           in your Adsterra publisher dashboard. -->
+        <p>Ad space — paste your Adsterra ad code here.</p>
+      </div>
+    </section>
+
+    <!-- Main Movies Section -->
+    <main class="movies-page">
+      <div class="container">
+
+        <div class="movies-heading">
+          <h1>Explore <span>Movies</span></h1>
+          <p>
+            Discover movies from different genres.
+            Apni pasand ki movie search karo aur explore karo.
+          </p>
+        </div>
+
+        <!-- Search -->
+        <div class="movies-toolbar">
+          <form class="movies-search" id="" method="get" action="{% url 'search' %}">
+            <input type="search" id="" name="search" placeholder="Movie ka naam likho..."
+              aria-label="Search movie titles">
+            <button type="submit">Search</button>
+          </form>
+
+          <p id="movieCount" aria-live="polite">{{searchAllCount}} movies available</p>
+        </div>
+        <!-- Genre Filters -->
+        <div class="movie-filters" aria-label="Filter movies by genre">
+          <a href="{% url 'Movies' %}"><button class="movie-filter" type="button" data-genre="all"
+              aria-pressed="true">All Movies</button></a>
+          {% for j in get_all_catogri%}
+          <a href="{% url 'catogri_page' j.id %}"><button class="movie-filter" type="button" data-genre="action"
+              aria-pressed="false">{{j.catogri_name}}</button></a>
+          {% empty %}
+          not founded catogri...
+          {% endfor %}
+        </div>
+
+        <!-- Movie Cards -->
+        <section class="movies-grid" id="moviesGrid" aria-label="Movies">
+
+          {% for i in m_data2%}
+
+          <article class="movie-card" data-title="Toy Story" data-genre="comedy animation">
+            <div class="movie-poster">
+              <!-- <img src="" alt="Toy Story movie poster" loading="lazy"> -->
+              <video src="{{i.Movies_file.url}}" controls width="100%" style="height: 140px;"></video>
+              <span class="movie-quality">HD</span>
+            </div>
+            <div class="movie-info">
+              <h2>{{i.Movies_name}}</h2>
+              <div class="movie-meta">
+                <span>{{i.Movies_year}}</span><span>{{i.Movies_Action}}</span><span>{{i.Movies_duration}}</span>
+              </div>
+              <p>{{i.Movies_description}}</p>
+              <div class="movie-actions">
+                <a class="movie-details" href="{% url 'home' %}">MoviesBoxHD</a>
+                <a class="movie-download" href="{% url 'download_Movie' i.id %}">Download</a>
+              </div>
+            </div>
+          </article>
+          {% empty %}
+          <p style="color: red;"> not founded <b style="color: blue;">{{Query_search}}</b> Please Try again...</p>
+          {% endfor %}
+
+        </section>
+
+        <p class="movies-empty" id="moviesEmpty" hidden>
+          Bhai, is search ya category mein koi movie nahi mili.
+          Doosra naam try karo.
+        </p>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          &copy; <span id="currentYear"></span> MovieBoxHD.
+          All rights reserved.
+        </p>
+        <p>Only upload or share content you have permission to distribute.</p>
+      </div>
+    </footer>
+
+    <!-- Shared site JavaScript; use the path that exists in your project -->
+    <script src="js/script.js"></script>
+
+    <!-- Movies page filtering -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cards = Array.from(document.querySelectorAll(".movie-card"));
+        const searchInput = document.getElementById("movieSearch");
+        const searchForm = document.getElementById("movieSearchForm");
+        const filters = document.querySelectorAll(".movie-filter");
+        const movieCount = document.getElementById("movieCount");
+        const emptyMessage = document.getElementById("moviesEmpty");
+
+        let selectedGenre = "all";
+
+        function updateMovies() {
+          const query = searchInput.value.trim().toLowerCase();
+          let visibleCount = 0;
+
+          cards.forEach(function (card) {
+            const title = (
+              card.dataset.title ||
+              card.querySelector("h2")?.textContent ||
+              ""
+            ).toLowerCase();
+
+            const genre = (card.dataset.genre || "").toLowerCase();
+
+            const description = (
+              card.querySelector(".movie-info p")?.textContent || ""
+            ).toLowerCase();
+
+            const matchesSearch =
+              title.includes(query) ||
+              description.includes(query) ||
+              genre.includes(query);
+
+            const matchesGenre =
+              selectedGenre === "all" ||
+              genre.split(/\s+/).includes(selectedGenre);
+
+            const visible = matchesSearch && matchesGenre;
+            card.hidden = !visible;
+
+            if (visible) visibleCount++;
+          });
+
+          movieCount.textContent =
+            visibleCount + (visibleCount === 1
+              ? " movie available"
+              : " movies available");
+
+          emptyMessage.hidden = visibleCount !== 0;
+        }
+
+        if (searchInput) {
+          searchInput.addEventListener("input", updateMovies);
+        }
+
+        if (searchForm) {
+          searchForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            updateMovies();
+          });
+        }
+
+        filters.forEach(function (button) {
+          button.addEventListener("click", function () {
+            selectedGenre = button.dataset.genre || "all";
+
+            filters.forEach(function (filter) {
+              const isActive = filter === button;
+              filter.classList.toggle("active", isActive);
+              filter.setAttribute("aria-pressed", String(isActive));
+            });
+
+            updateMovies();
+          });
+        });
+
+        const yearElement = document.getElementById("currentYear");
+
+        if (yearElement) {
+          yearElement.textContent = new Date().getFullYear();
+        }
+
+        updateMovies();
+      });
+
+
+      "use strict";
+
+      /* =========================================
+         MoviesBox HD - Main JavaScript
+         Frontend ready for future Django backend
+      ========================================= */
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initMobileMenu();
+        initSearch();
+        initContentCards();
+        initPlayButtons();
+      });
+
+
+      /* =========================================
+         1. MOBILE NAVIGATION MENU
+      ========================================= */
+
+      function initMobileMenu() {
+        const menuToggle = document.getElementById("menuToggle");
+        const navMenu = document.getElementById("navMenu");
+
+        if (!menuToggle || !navMenu) return;
+
+        menuToggle.setAttribute("aria-expanded", "false");
+
+        menuToggle.addEventListener("click", () => {
+          const isOpen = navMenu.classList.toggle("open");
+
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        // Close menu after clicking a navigation link
+        navMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            navMenu.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        // Close menu when Escape is pressed
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            navMenu.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          }
+        });
+      }
+
+
+      /* =========================================
+         2. SEARCH BOX AND CONTENT FILTERING
+      ========================================= */
+
+      function initSearch() {
+        const searchToggle = document.getElementById("searchToggle");
+        const searchBox = document.getElementById("searchBox");
+        const searchForm = document.getElementById("searchForm");
+        const searchInput = document.getElementById("searchInput");
+
+        if (!searchInput) return;
+
+        // Open and close search box
+        if (searchToggle && searchBox) {
+          searchToggle.setAttribute("aria-expanded", "false");
+
+          searchToggle.addEventListener("click", () => {
+            const isOpen = searchBox.classList.toggle("open");
+
+            searchToggle.setAttribute(
+              "aria-expanded",
+              String(isOpen)
+            );
+
+            if (isOpen) {
+              searchInput.focus();
+            } else {
+              searchInput.value = "";
+              filterContent("");
+            }
+          });
+        }
+
+        // Prevent page reload when submitting search
+        // if (searchForm) {
+        //   searchForm.addEventListener("submit", (event) => {
+        //     event.preventDefault();
+        //     filterContent(searchInput.value);
+        //   });
+        // }
+
+        // Filter content while typing
+        searchInput.addEventListener("input", () => {
+          filterContent(searchInput.value);
+        });
+      }
+
+
+      /* =========================================
+         3. FILTER MOVIES, VIDEOS AND PICTURES
+      ========================================= */
+
+      // function filterContent(searchTerm) {
+      //   const cards = document.querySelectorAll(
+      //     ".content-card, .picture-card"
+      //   );
+
+      //   const query = searchTerm.trim().toLowerCase();
+
+      //   const sections = new Set();
+      //   let visibleCount = 0;
+
+      //   cards.forEach((card) => {
+      //     const searchableText = [
+      //       card.innerText || "",
+      //       card.textContent || "",
+      //       card.getAttribute("data-search") || "",
+      //       card.getAttribute("data-title") || "",
+      //       card.getAttribute("data-category") || ""
+      //     ].join(" ").toLowerCase();
+
+      //     const matches = query === "" || searchableText.includes(query);
+
+      //     card.hidden = !matches;
+
+      //     if (matches) {
+      //       visibleCount++;
+      //     }
+
+      //     const section = card.closest("section");
+
+      //     if (section) {
+      //       sections.add(section);
+      //     }
+      //   });
+
+      // Hide a section if all its content cards are hidden
+      sections.forEach((section) => {
+        const sectionCards = section.querySelectorAll(
+          ".content-card, .picture-card"
+        );
+
+        const hasVisibleCards = Array.from(sectionCards).some(
+          (card) => !card.hidden
+        );
+
+        section.hidden = !hasVisibleCards;
+      });
+
+      // Show a message when no content matches the search
+      // let noResults = document.getElementById("searchNoResults");
+
+      // if (!noResults) {
+      //   noResults = document.createElement("p");
+      //   noResults.id = "searchNoResults";
+      //   noResults.className = "search-no-results";
+      //   noResults.textContent = "Sorry, koi content nahi mila.";
+      //   noResults.setAttribute("role", "status");
+
+      //   const main = document.querySelector("main");
+
+      //   if (main) {
+      //     main.appendChild(noResults);
+      //   }
+      // }
+
+      // noResults.hidden = query === "" || visibleCount > 0;
+      // }
+
+
+      /* =========================================
+         4. CONTENT CARD INITIALIZATION
+      ========================================= */
+
+      function initContentCards() {
+        const cards = document.querySelectorAll(
+          ".content-card, .picture-card"
+        );
+
+        cards.forEach((card) => {
+          // Add a fallback accessible label if missing
+          if (!card.hasAttribute("tabindex")) {
+            card.setAttribute("tabindex", "0");
+          }
+        });
+      }
+
+
+      /* =========================================
+         5. PLAY BUTTONS
+      ========================================= */
+
+      function initPlayButtons() {
+        const playButtons = document.querySelectorAll(".play-button");
+
+        playButtons.forEach((button) => {
+          button.addEventListener("click", (event) => {
+            // Avoid accidental card or link navigation
+            event.preventDefault();
+
+            const card = button.closest(
+              ".content-card, .picture-card"
+            );
+
+            if (!card) return;
+
+            const titleElement = card.querySelector(
+              "h2, h3, h4, .card-title"
+            );
+
+            const title = titleElement
+              ? titleElement.textContent.trim()
+              : "Selected content";
+
+            /*
+              Actual video playback will be connected
+              when real video URLs or Django media URLs
+              are available.
+            */
+            console.info(
+              "Selected content:",
+              title,
+              "- Add the real media URL to enable playback."
+            );
+          });
+        });
+      }
+
+    </script>
+
+  </body>
+
+</html>
